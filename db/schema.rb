@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_105339) do
+ActiveRecord::Schema.define(version: 2020_03_28_105528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "movie_screens", force: :cascade do |t|
+    t.bigint "screen_id", null: false
+    t.bigint "movie_id", null: false
+    t.bigint "slot_id", null: false
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_movie_screens_on_movie_id"
+    t.index ["screen_id"], name: "index_movie_screens_on_screen_id"
+    t.index ["slot_id"], name: "index_movie_screens_on_slot_id"
+  end
 
   create_table "movies", force: :cascade do |t|
     t.string "name"
@@ -50,4 +62,7 @@ ActiveRecord::Schema.define(version: 2020_03_28_105339) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "movie_screens", "movies"
+  add_foreign_key "movie_screens", "screens"
+  add_foreign_key "movie_screens", "slots"
 end

@@ -10,4 +10,8 @@ RSpec.describe Movie, type: :model do
     it { should validate_presence_of(:release_date) }
     it { should validate_presence_of(:name) }
   end
+
+  describe 'associations' do
+    it { should have_many :movie_screens }
+  end
 end
