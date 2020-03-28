@@ -8,20 +8,21 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   ROLES = { admin: 'admin', customer: 'customer' }.freeze
+  DEFAULT_ROLE = ROLES[:customer]
 
-  after_validation :assign_role
+  validates :role, inclusion: ROLES.values
 
-  def admin?
-    role.eql? ROLES[:admin]
-  end
+  before_validation :assign_default_role
 
-  def customer?
-    role.eql? ROLES[:customer]
+  ROLES.values.each do |role_var|
+    define_method "#{role_var}?" do
+      role.eql? role_var
+    end
   end
 
   private
 
-  def assign_role
-    self.role = ROLES[:customer] if role.blank?
+  def assign_default_role
+    self.role = DEFAULT_ROLE if role.blank?
   end
 end
