@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_105528) do
+ActiveRecord::Schema.define(version: 2020_03_28_112948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,8 +37,37 @@ ActiveRecord::Schema.define(version: 2020_03_28_105528) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "reservation_seats", force: :cascade do |t|
+    t.bigint "reservation_id", null: false
+    t.bigint "seat_id", null: false
+    t.integer "price", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reservation_id"], name: "index_reservation_seats_on_reservation_id"
+    t.index ["seat_id"], name: "index_reservation_seats_on_seat_id"
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.bigint "screen_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "price", null: false
+    t.boolean "paid"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["screen_id"], name: "index_reservations_on_screen_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
   create_table "screens", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "seats", force: :cascade do |t|
+    t.string "row", limit: 5
+    t.integer "number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -65,4 +94,8 @@ ActiveRecord::Schema.define(version: 2020_03_28_105528) do
   add_foreign_key "movie_screens", "movies"
   add_foreign_key "movie_screens", "screens"
   add_foreign_key "movie_screens", "slots"
+  add_foreign_key "reservation_seats", "reservations"
+  add_foreign_key "reservation_seats", "seats"
+  add_foreign_key "reservations", "screens"
+  add_foreign_key "reservations", "users"
 end
