@@ -8,4 +8,18 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = yield
+    = render 'layouts/header'
+    - if current_user
+      .row
+        .col-md-2
+        .col-md-9
+          - unless flash.blank?
+            = render 'shared/flash'
+      = yield
+    - else
+      .row
+        .col-md-3
+        .col-md-6
+          - unless flash.blank?
+            = render 'shared/flash'
+          = yield
