@@ -6,6 +6,8 @@ AllCops:
     - 'script/**/*'
     - 'vendor/**/*'
     - 'bin/**/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
   TargetRubyVersion: 2.7
 
 Layout/LineLength:
