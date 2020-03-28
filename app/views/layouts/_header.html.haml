@@ -1,23 +1,7 @@
-.top-div
-%nav.navbar.navbar-default.header-background
-  .container-fluid
-    .navbar-header
-      %button.navbar-toggle.collapsed{"data-toggle" => "collapse",
-        "data-target" => "#navigationbar",
-        "aria-expanded" => "false"}
-        %span.sr-only
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-
-      .pull-right.header-text Movie Application
-
-
+%nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+  %a.navbar-brand{:href => "#"} Movie Booking Application
+  / Links
+  %ul.navbar-nav
     - if current_user.present?
-      .collapse.navbar-collapse#navigationbar
-        %ul.nav.navbar-right.nav-pills
-          %li.dropdown
-            %a.header-menu-text.dropdown-toggle{"data-toggle"=>"dropdown", "role"=>"button", "aria-haspopup"=>"true", "aria-expanded"=>"false"} Settings
-            %ul.dropdown-menu
-              %li.header-menu-text=link_to "Change Password", edit_user_registration_path
-              %li.header-menu-text=link_to "Log out", destroy_user_session_path, method: :delete
+      %li.nav-item
+        = link_to "Log out", destroy_user_session_path, method: :delete
