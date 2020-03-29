@@ -31,3 +31,5 @@
 
 en:
   hello: "Hello world"
+  movies:
+    not_found: 'Movie does not exist with given id'

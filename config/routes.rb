@@ -4,7 +4,14 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  resources :movies, only: [:index]
+  resources :movies, only: [:index] do
+    resources :screens, only: [:index]
+  end
+
+  resources :movie_screens, only:[] do
+    resources :reservations, only: [:index]
+  end
+
   resources :reports, only: [:index]
 
   authenticated :user, ->(u) { u.admin? } do

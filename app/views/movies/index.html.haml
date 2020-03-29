@@ -1,1 +1,14 @@
-movies
+.row
+  .col-12
+    - @movies.each_slice(3) do |movies_array|
+      .card-deck.justify-content-center.mt-5
+        - movies_array.each do |movie|
+          .card.col-3
+            = link_to movie_screens_path(movie.id), { class: 'card-link'} do
+              = image_tag movie.image_url, { class: "card-img-top"}
+              .card-body
+                %h5.card-title #{movie.name} (#{movie.language})
+                %p.card-text= movie.description
+                %p.card-text
+                  %small.text-muted Released on #{movie.release_date} | Duration: #{movie.duration}
+

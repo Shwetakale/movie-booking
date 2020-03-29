@@ -11,7 +11,7 @@ user = User.new(email: 'shwetakale13@gmail.com', role: 'admin')
 user.password = 'shweta123'
 user.save
 
-movie1 = Movie.create( name: 'Star Wars', description: 'Star Wars is an American epic space-opera media franchise created by George Lucas, which began with the eponymous 1977 film and quickly became a worldwide pop-culture phenomenon.', duration: 120, release_date: Date.today - 10.days, language: 'English' )
+movie1 = Movie.create( name: 'Star Wars1', description: 'Star Wars is an American epic space-opera media franchise created by George Lucas, which began with the eponymous 1977 film and quickly became a worldwide pop-culture phenomenon.', duration: 120, release_date: Date.today - 10.days, language: 'English' )
 
 movie2 = Movie.create(name: 'Lord of the Rings', description: 'DescriptionA young hobbit, Frodo, who has found the One Ring that belongs to the Dark Lord Sauron, begins his journey with eight companions to Mount Doom, the only place where it can be destroyed.', duration: 130, release_date: Date.today - 2.days, language: 'English' )
 
