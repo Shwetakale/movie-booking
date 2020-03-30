@@ -27,6 +27,12 @@ class ReservationsController < ApplicationController
     redirect_to movies_path
   end
 
+  def clear_cart
+    current_user.reservations.where(paid: false).destroy_all
+    reservation_data
+    render action: 'cart_action', layout: false
+  end
+
   private
 
   def active_reservation_and_seats

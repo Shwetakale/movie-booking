@@ -6,7 +6,11 @@ class MoviesController < ApplicationController
 
   def index
     # This will fetch all movies with show for future date
-    @movies = Movie.joins(:movie_screens).where('start_time > ?', Time.now).distinct('movies.id').order(:release_date)
-    # Fecth upcoming movies
+    if current_user.admin?
+      @movies = Movie.joins(:movie_screens).distinct('movies.id').order(:release_date)
+    else
+      @movies = Movie.joins(:movie_screens).where('start_time > ?', Time.now).distinct('movies.id').order(:release_date)
+    end
+      # Fecth upcoming movies
   end
 end

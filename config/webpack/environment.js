@@ -2,11 +2,13 @@ const { environment } = require('@rails/webpacker')
 
 const webpack = require("webpack")
 
-environment.plugins.append("Provide", new webpack.ProvidePlugin({
+environment.plugins.prepend("Provide", new webpack.ProvidePlugin({
 
-$: 'jquery',
+$: 'jquery/src/jquery',
 
-jQuery: 'jquery',
+jQuery: 'jquery/src/jquery',
+
+"datatables.net-bs4":  'datatables.net-bs4/js/dataTables.bootstrap4',
 
 Popper: ['popper.js', 'default']
 

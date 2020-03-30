@@ -7,6 +7,5 @@
             .card
               .card-body
                 %h5.card-title= "#{screen.start_time}"
-                %p.card-text= "Booked Seats: 10 | Available Seats: 10"
                 = link_to "Book Now", movie_screen_reservations_path(screen.msid), { class: 'btn btn-primary' }
 

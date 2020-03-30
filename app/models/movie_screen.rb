@@ -21,11 +21,14 @@ class MovieScreen < ApplicationRecord
     reservations.joins(reservation_seats: :seat).where(active: true, user_id: user_id, paid: false).pluck('seats.number')
   end
 
+  def available_seats_count
+    reservations.joins(reservation_seats: :seat).where(active: false).count
+  end
   private
 
   def initailize_seats
     row_number = 1
-    price = 100
+    price = 200
     (Screen::ROWS * Screen::COLUMNS).times do |i|
       seats.create(row: row_number, number: i, price: price)
     end

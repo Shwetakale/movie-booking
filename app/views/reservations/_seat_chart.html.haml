@@ -46,7 +46,6 @@
          };
          var sc = new Seatchart(options);
          sc.onChange = function(e) {
-         console.log(e);
          $.ajax({
            type: "POST",
            url: 'reservations/cart_action',
@@ -54,7 +53,16 @@
            dataType: 'html',
            complete: function(data){ $('#seat_chart').html(data.responseText) ; searchChartCallback() },
         });
-         }
+          }
+
+         sc.onClear = function(e) {
+         $.ajax({
+           type: "POST",
+           url: 'reservations/clear_cart',
+           dataType: 'html',
+           complete: function(data){ $('#seat_chart').html(data.responseText) ; searchChartCallback() },
+        });
+        }
       }
 
 %script{:onload => "searchChartCallback()", :src => "/seatchart/seatchart.js"}

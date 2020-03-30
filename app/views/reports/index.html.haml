@@ -1,1 +1,19 @@
-reports
+.row
+%br
+%table.table-striped.table-bordered#reports_table
+  %thead
+    %tr
+      %th Screen
+      %th Time
+      %th Reserved Seats
+      %th Available Seats
+  %tbody
+    - @data.each do |report|
+      %tr
+        %td= report.screen.name
+        %td= report.start_time
+        %td= report.reservations.count
+        %td= report.reservations.count
+
+:javascript
+  $("#reports_table").DataTable()

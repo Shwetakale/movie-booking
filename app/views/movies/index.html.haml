@@ -4,7 +4,8 @@
       .card-deck.justify-content-center.mt-5
         - movies_array.each do |movie|
           .card.col-3
-            = link_to movie_screens_path(movie.id), { class: 'card-link'} do
+            - path = current_user.admin? ? movie_reports_path(movie.id) : movie_screens_path(movie.id)
+            = link_to path, { class: 'card-link'} do
               = image_tag movie.image_url, { class: "card-img-top"}
               .card-body
                 %h5.card-title #{movie.name} (#{movie.language})

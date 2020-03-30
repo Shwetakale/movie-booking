@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :movies, only: [:index] do
     resources :screens, only: [:index]
+    resources :reports, only: [:index]
   end
 
   resources :movie_screens, only:[] do
@@ -13,14 +14,9 @@ Rails.application.routes.draw do
       get :book
       collection do
         post 'cart_action'
+        post 'clear_cart'
       end
     end
-  end
-
-  resources :reports, only: [:index]
-
-  authenticated :user, ->(u) { u.admin? } do
-    root to: 'reports#index', as: "admin-reports"
   end
 
   authenticated :user, ->(u) { u.customer? } do
