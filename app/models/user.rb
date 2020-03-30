@@ -10,6 +10,8 @@ class User < ApplicationRecord
   ROLES = { admin: 'admin', customer: 'customer' }.freeze
   DEFAULT_ROLE = ROLES[:customer]
 
+  has_many :reservations
+
   validates :role, inclusion: ROLES.values
 
   before_validation :assign_default_role

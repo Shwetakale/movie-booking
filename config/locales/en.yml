@@ -33,3 +33,5 @@ en:
   hello: "Hello world"
   movies:
     not_found: 'Movie does not exist with given id'
+  reservation:
+    book: 'Your booking is completed successfully!'

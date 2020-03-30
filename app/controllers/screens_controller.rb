@@ -7,9 +7,9 @@ class ScreensController < ApplicationController
 
   def index
     if @movie.present?
-      @screens = @movie.screens.joins(:movie_screens)
-                       .select('screens.name, movie_screens.start_time, movie_screens.date, movie_screens.id as msid')
-                       .order('movie_Screens.date, movie_screens.start_time')
+      @screens = @movie.screens.joins(:movie_screens).where('movie_screens.start_time > ?', Time.now)
+                       .select('screens.name, movie_screens.start_time, movie_screens.start_time, movie_screens.id as msid')
+                       .order('movie_Screens.start_time, movie_screens.start_time')
     else
       flash[:danger] = I18n.t('movies.not_found')
     end

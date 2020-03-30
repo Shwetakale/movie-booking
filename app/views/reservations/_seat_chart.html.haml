@@ -1,0 +1,61 @@
+.row
+  #map-container
+  #legend-container
+  #shoppingCart-container
+.row
+  .col-5
+  - if @active_reservation.present?
+    = link_to "Book Now", movie_screen_reservation_book_path(@movie_screen.id, @active_reservation.id), { confirm: "Are you sure?", class: 'btn btn-primary' }
+:javascript
+  function searchChartCallback() {
+              var options = {
+             // Reserved and disabled seats are indexed
+             // from left to right by starting from 0.
+             // Given the seatmap as a 2D array and an index [R, C]
+             // the following values can obtained as follow:
+             // I = columns * R + C
+             map: {
+                 id: 'map-container',
+                 rows: #{@rows},
+                 columns: #{@columns},
+                 // e.g. Reserved Seat [Row: 1, Col: 2] = 7 * 1 + 2 = 9
+                 reserved: {
+                     seats: #{@reserved_seats},
+                 },
+                 disabled: {
+                     seats: [],
+                     rows: [],
+                     columns: []
+                 }
+             },
+             types: [
+                 { type: "regular", backgroundColor: "#006c80", price: 200, selected: #{@selected_seats} },
+             ],
+             cart: {
+                 id: 'shoppingCart-container',
+                 width: 280,
+                 height: 250,
+                 currency: 'Rs',
+             },
+             legend: {
+                 id: 'legend-container',
+             },
+             assets: {
+                 path: "/seatchart/assets",
+             }
+         };
+         var sc = new Seatchart(options);
+         sc.onChange = function(e) {
+         console.log(e);
+         $.ajax({
+           type: "POST",
+           url: 'reservations/cart_action',
+           data: {"user_action": e.action, "current": e.current },
+           dataType: 'html',
+           complete: function(data){ $('#seat_chart').html(data.responseText) ; searchChartCallback() },
+        });
+         }
+      }
+
+%script{:onload => "searchChartCallback()", :src => "/seatchart/seatchart.js"}
+

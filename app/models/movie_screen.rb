@@ -5,15 +5,29 @@ class MovieScreen < ApplicationRecord
   belongs_to :screen
   belongs_to :movie
   belongs_to :slot
+  has_many :seats
+  has_many :reservations
 
-  validates :screen, :movie, :slot, :date, presence: true
-  validates :screen, uniqueness: { scope: %i[movie date slot] }
+  validates :screen, :movie, :slot, :start_time, presence: true
+  validates :screen, uniqueness: { scope: %i[movie start_time slot] }
 
-  before_validation :copy_start_time_from_slot
+  after_create :initailize_seats
+
+  def reserved_seats
+    reservations.joins(reservation_seats: :seat).where(active: true, paid: true).pluck('seats.number')
+  end
+
+  def selected_seats(user_id)
+    reservations.joins(reservation_seats: :seat).where(active: true, user_id: user_id, paid: false).pluck('seats.number')
+  end
 
   private
 
-  def copy_start_time_from_slot
-    self.start_time = slot.start_time
+  def initailize_seats
+    row_number = 1
+    price = 100
+    (Screen::ROWS * Screen::COLUMNS).times do |i|
+      seats.create(row: row_number, number: i, price: price)
+    end
   end
 end

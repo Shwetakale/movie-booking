@@ -9,7 +9,12 @@ Rails.application.routes.draw do
   end
 
   resources :movie_screens, only:[] do
-    resources :reservations, only: [:index]
+    resources :reservations, only: [:index] do
+      get :book
+      collection do
+        post 'cart_action'
+      end
+    end
   end
 
   resources :reports, only: [:index]
