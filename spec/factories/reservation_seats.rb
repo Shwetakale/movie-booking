@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :reservation_seat do
-    reservarion { nil }
-    seat { nil }
-    price { nil }
+    reservation
+    seat
+    price { 100 }
   end
 end

@@ -2,7 +2,8 @@
 
 FactoryBot.define do
   factory :seat do
-    row { 'MyString' }
+    row { 'M' }
     number { 1 }
+    movie_screen
   end
 end

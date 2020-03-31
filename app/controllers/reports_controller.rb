@@ -9,7 +9,8 @@ class ReportsController < ApplicationController
     @data = @movie.movie_screens.includes(reservations: :reservation_seats)
   end
 
-  private 
+  private
+
   def load_movie
     @movie = Movie.find_by(id: params[:movie_id])
   end

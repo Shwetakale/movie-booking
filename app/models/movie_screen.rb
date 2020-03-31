@@ -24,6 +24,7 @@ class MovieScreen < ApplicationRecord
   def available_seats_count
     reservations.joins(reservation_seats: :seat).where(active: false).count
   end
+
   private
 
   def initailize_seats

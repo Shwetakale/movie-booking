@@ -3,6 +3,7 @@
 # This class will perform operations related to reservation
 class Reservation < ApplicationRecord
   belongs_to :user
+  belongs_to :movie_screen
   has_many :reservation_seats, dependent: :destroy
 
   before_save :calculate_price
