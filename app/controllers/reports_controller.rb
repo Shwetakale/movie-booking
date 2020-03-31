@@ -10,7 +10,8 @@ class ReportsController < ApplicationController
     @reports = []
     data.each do |d|
       stats = d.stats
-      @reports << { available: stats[:available], reserved: stats[:reserved], selected: stats[:selected], screen_name: d.screen.name, time: d.start_time }
+      @reports << { available: stats[:available], reserved: stats[:reserved], selected: stats[:selected],
+                    screen_name: d.screen.name, time: d.start_time.strftime('%I %p'), date: d.start_time.strftime('%F') }
     end
   end
 
