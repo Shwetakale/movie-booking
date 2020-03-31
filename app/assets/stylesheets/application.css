@@ -15,3 +15,28 @@
  *= require_tree .
  *= require_self
  */
+
+
+.dataTables_filter { @extend .pull-right; }
+
+.dataTable th {
+    background-color: #2094fa;
+    color: white;
+}
+
+.dataTable th, .dataTable td { white-space: pre-wrap;
+    text-align: center;
+}
+div.dataTables_wrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.dataTables_scroll {
+    margin-top: 2%;
+}
+
+.dataTable tr{
+  height: 50px;
+}
+
