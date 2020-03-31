@@ -6,14 +6,16 @@
       %th Screen
       %th Time
       %th Reserved Seats
+      %th Selected Seats
       %th Available Seats
   %tbody
-    - @data.each do |report|
+    - @reports.each do |report|
       %tr
-        %td= report.screen.name
-        %td= report.start_time
-        %td= report.reservations.count
-        %td= report.reservations.count
+        %td= report[:screen_name]
+        %td= report[:start_time]
+        %td= report[:reserved]
+        %td= report[:selected]
+        %td= report[:available]
 
 :javascript
   $("#reports_table").DataTable()

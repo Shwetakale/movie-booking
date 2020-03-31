@@ -17,12 +17,23 @@ class MovieScreen < ApplicationRecord
     reservations.joins(reservation_seats: :seat).where(active: true, paid: true).pluck('seats.number')
   end
 
-  def selected_seats(user_id)
-    reservations.joins(reservation_seats: :seat).where(active: true, user_id: user_id, paid: false).pluck('seats.number')
+  def selected_seats(user_id = nil)
+    if user_id.present?
+      reservations.joins(reservation_seats: :seat).where(active: true, user_id: user_id, paid: false).pluck('seats.number')
+    else
+      reservations.joins(reservation_seats: :seat).where(active: true, paid: false).pluck('seats.number')
+    end
   end
 
   def available_seats_count
     reservations.joins(reservation_seats: :seat).where(active: false).count
+  end
+
+  def stats
+    reserved = reserved_seats.count
+    selected = selected_seats.count
+    available = seats.count - selected - reserved
+    { reserved: reserved, selected: selected, available: available }
   end
 
   private
