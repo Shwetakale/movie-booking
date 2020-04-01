@@ -17,10 +17,11 @@ class ReportsController < ApplicationController
   end
 
   def bookings
-    @reports  = []
+    @reports = []
     @user.reservations.order(:created_at).where(paid: true).includes(movie_screen: :movie).each do |res|
       ms = res.movie_screen
-      @reports << { movie_name: ms.movie.name, screen: ms.screen.name, seat_numbers: res.reservation_seats.joins(:seat).pluck("seats.number").join(','), date: ms.start_time.strftime('%F'), time:  ms.start_time.strftime('%I %p')}
+      @reports << { movie_name: ms.movie.name, screen: ms.screen.name,
+                    seat_numbers: res.reservation_seats.joins(:seat).pluck('seats.number').join(','), date: ms.start_time.strftime('%F'), time: ms.start_time.strftime('%I %p') }
     end
   end
 
@@ -29,6 +30,7 @@ class ReportsController < ApplicationController
   def load_user
     @user = User.find_by(id: params[:user_id])
   end
+
   def load_movie
     @movie = Movie.find_by(id: params[:movie_id])
   end

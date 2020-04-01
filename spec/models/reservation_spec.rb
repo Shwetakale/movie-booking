@@ -8,9 +8,9 @@ RSpec.describe Reservation, type: :model do
       it 'will store cummulative price in reservation table' do
         reservation = create(:reservation)
         create(:reservation_seat, reservation: reservation, price: 100, reservation: reservation)
-        create(:reservation_seat, reservation: reservation, price: 300, reservation: reservation)
+        create(:reservation_seat, reservation: reservation, price: 100, reservation: reservation)
         reservation.save
-        expect(reservation.price).to eq 400
+        expect(reservation.price).to eq 200
       end
     end
   end
