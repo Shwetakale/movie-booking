@@ -562,13 +562,8 @@ document.head.appendChild(jQueryScript);
             seatName.textContent = seat.name;
             seatName.className = 'sc-cart-seat-name';
 
-            var seatType = document.createElement('div');
-            seatType.textContent = seat.type.capitalizeFirstLetter();
-            seatType.className = 'sc-cart-seat-type';
-
             ticket.appendChild(stripes);
             ticket.appendChild(seatName);
-            ticket.appendChild(seatType);
             ticket.appendChild(stripes.cloneNode(true));
 
             return ticket;
@@ -590,7 +585,6 @@ document.head.appendChild(jQueryScript);
             ticketTd.appendChild(ticket);
 
             var seatPrice = document.createElement('td');
-            seatPrice.textContent = '{0}{1}'.format(options.cart.currency, seat.price.toFixed(2));
 
             var deleteTd = document.createElement('td');
             var deleteBtn = createScDeleteButton();
@@ -684,8 +678,6 @@ document.head.appendChild(jQueryScript);
                     var ticketType = ticket.getElementsByClassName('sc-cart-seat-type')[0];
                     ticketType.textContent = current.type.capitalizeFirstLetter();
 
-                    var ticketPrice = itemContent[1];
-                    ticketPrice.textContent = '{0}{1}'.format(options.cart.currency, current.price.toFixed(2));
                 }
 
                 if (emit && self.onChange !== null) {
@@ -1685,7 +1677,6 @@ document.head.appendChild(jQueryScript);
             label.textContent = 'All';
             deleteBtn.appendChild(label);
 
-            container.appendChild(cartTotal);
             container.appendChild(deleteBtn);
 
             return container;

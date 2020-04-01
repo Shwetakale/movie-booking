@@ -1,0 +1,10 @@
+.row
+  .col-4
+  .col-4
+    .card.border-primary.mb-3
+      .card-header Congratulations, Your booking is successful
+      .card-body.text-primary
+        %h5.card-title="Movie Name #{@reservation.movie_screen.movie.name}"
+        %p.card-text= "Date: #{@reservation.movie_screen.start_time}"
+  .col-4
+

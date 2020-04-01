@@ -1,11 +1,16 @@
 .row
   #map-container
   #legend-container
+    %h1 Price Range 
+    - @price_ranges.each do |pr|
+      = "#{pr[:rows].join(',')}: #{pr[:price]} RS"
+      %br
   #shoppingCart-container
+    %h3 Total: #{@total}
 .row
   .col-5
-  - if @active_reservation.present?
-    = link_to "Book Now", movie_screen_reservation_book_path(@movie_screen.id, @active_reservation.id), { confirm: "Are you sure?", class: 'btn btn-primary' }
+  - if @active_reservation.reservation_seats.present?
+    = link_to "Book Now", book_movie_screen_reservation_path(@movie_screen.id, @active_reservation.id), :data => {:confirm => 'Are you sure?'}, class: 'btn btn-primary'
 :javascript
   function searchChartCallback() {
               var options = {
@@ -36,9 +41,6 @@
                  width: 280,
                  height: 250,
                  currency: 'Rs',
-             },
-             legend: {
-                 id: 'legend-container',
              },
              assets: {
                  path: "/seatchart/assets",

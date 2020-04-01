@@ -11,7 +11,10 @@ Rails.application.routes.draw do
 
   resources :movie_screens, only:[] do
     resources :reservations, only: [:index] do
-      get :book
+      member do
+        get :book
+        get :order
+      end
       collection do
         post 'cart_action'
         post 'clear_cart'

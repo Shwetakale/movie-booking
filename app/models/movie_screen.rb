@@ -19,9 +19,9 @@ class MovieScreen < ApplicationRecord
 
   def selected_seats(user_id = nil)
     if user_id.present?
-      reservations.joins(reservation_seats: :seat).where(active: true, user_id: user_id, paid: false).pluck('seats.number')
+      reservations.joins(reservation_seats: :seat).where(active: true, user_id: user_id, paid: false)
     else
-      reservations.joins(reservation_seats: :seat).where(active: true, paid: false).pluck('seats.number')
+      reservations.joins(reservation_seats: :seat).where(active: true, paid: false)
     end
   end
 
@@ -39,10 +39,12 @@ class MovieScreen < ApplicationRecord
   private
 
   def initailize_seats
-    row_number = 1
-    price = 200
-    (Screen::ROWS * Screen::COLUMNS).times do |i|
-      seats.create(row: row_number, number: i, price: price)
+    Screen::SEATS.each do |s|
+      num = s[:low]
+      (s[:high] - s[:low]).times do |i|
+        num = num + 1
+        seats.create(number: num, price: s[:price])
+      end
     end
   end
 end

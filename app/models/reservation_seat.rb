@@ -4,4 +4,12 @@
 class ReservationSeat < ApplicationRecord
   belongs_to :reservation
   belongs_to :seat
+
+  before_validation :set_price
+
+  private
+  
+  def set_price
+    self.price = seat.price
+  end
 end

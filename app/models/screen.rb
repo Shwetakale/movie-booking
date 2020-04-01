@@ -7,9 +7,8 @@ class Screen < ApplicationRecord
   has_many :movie_screens
   has_many :movies, through: :movie_screens
 
+  # Thes 3 are dependent on each other and needs to be moved in seperate table
   ROWS = 8
   COLUMNS = 8
-  PRICE_UPPER = 200
-  PRICE_LOWER = 100
-  MID = 32
+  SEATS = [{low: 0, high: 23, price: 100, rows: ['A','B']}, {low: 24, high: 47, price: 150, rows: ['C', 'D', 'E']}, {low: 48, high: 63, price: 200, rows: ['F', 'G','H']}]
 end
