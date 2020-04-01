@@ -1,7 +1,12 @@
-%nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+%nav.navbar.navbar-expand-sm.bg-light.justify-content-between
   %a.navbar-brand{:href => "#"} Movie Booking Application
   / Links
   %ul.navbar-nav
     - if current_user.present?
       %li.nav-item
         = link_to "Log out", destroy_user_session_path, method: :delete
+      - if current_user.admin?
+        %li.nav-item
+          = link_to "| Movie Reports", movies_path
+        %li.nav-item
+          = link_to "| User Reports", users_path

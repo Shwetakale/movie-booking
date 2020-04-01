@@ -5,8 +5,8 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_movie_screen
   before_action :load_seat, only: [:cart_action]
-  before_action :active_reservation_and_seats, only: [:cart_action, :index]
-  before_action :load_reservation, only: [:book, :order]
+  before_action :active_reservation_and_seats, only: %i[cart_action index]
+  before_action :load_reservation, only: %i[book order]
 
   def index
     reservation_data
@@ -35,8 +35,7 @@ class ReservationsController < ApplicationController
     render action: 'cart_action', layout: false
   end
 
-  def order
-  end
+  def order; end
 
   private
 
@@ -48,7 +47,7 @@ class ReservationsController < ApplicationController
 
   def reservation_data
     @reserved_seats = @movie_screen.reserved_seats
-    @selected_seats = @movie_screen.selected_seats(current_user.id).pluck("seats.number")
+    @selected_seats = @movie_screen.selected_seats(current_user.id).pluck('seats.number')
     @columns = Screen::COLUMNS
     @rows = Screen::ROWS
     @price_ranges = Screen::SEATS

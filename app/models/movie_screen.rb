@@ -41,8 +41,8 @@ class MovieScreen < ApplicationRecord
   def initailize_seats
     Screen::SEATS.each do |s|
       num = s[:low]
-      (s[:high] - s[:low]).times do |i|
-        num = num + 1
+      (s[:high] - s[:low]).times do |_i|
+        num += 1
         seats.create(number: num, price: s[:price])
       end
     end

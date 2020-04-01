@@ -1,0 +1,21 @@
+.row
+%br
+%table.table-striped.table-bordered#reports_table
+  %thead
+    %tr
+      %th Movie Name
+      %th Screen
+      %th Date
+      %th Time
+      %th Reserved Seats
+  %tbody
+    - @reports.each do |report|
+      %tr
+        %td= report[:movie_name]
+        %td= report[:screen]
+        %td= report[:date]
+        %td= report[:time]
+        %td= report[:seat_numbers]
+
+:javascript
+  $("#reports_table").DataTable()

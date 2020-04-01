@@ -22,6 +22,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:index] do
+    resources :reports, only: [] do
+      collection do 
+        get :bookings
+      end
+    end
+  end
+
   authenticated :user, ->(u) { u.customer? } do
     root to: 'movies#index', as: "dashboard"
   end

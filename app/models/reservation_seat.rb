@@ -8,7 +8,7 @@ class ReservationSeat < ApplicationRecord
   before_validation :set_price
 
   private
-  
+
   def set_price
     self.price = seat.price
   end

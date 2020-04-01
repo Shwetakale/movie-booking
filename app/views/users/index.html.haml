@@ -1,0 +1,19 @@
+.row
+%br
+%table.table-striped.table-bordered#users_table
+  %thead
+    %tr
+      %th ID
+      %th Email ID
+      %th Created At
+      %th Bookings
+  %tbody
+    - @users.each do |user|
+      %tr
+        %th= user.id
+        %td= user.email
+        %td= user.created_at
+        %th= link_to "Show", bookings_user_reports_path(user.id)
+
+:javascript
+  $("#users_table").DataTable()
